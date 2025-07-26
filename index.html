@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bonstore - Daftar Game</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      background: #ffffff;
+      color: #000;
+    }
+
+    /* ===== NAVBAR ===== */
+    header {
+      background: #cc0d2d;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    .menu-btn {
+      width: 30px;
+      height: 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .menu-btn span {
+      height: 6px;
+      border-radius: 3px;
+      background: white;
+      display: block;
+    }
+
+    /* ===== POPUP MENU ===== */
+    .popup-menu {
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      width: 160px;
+      display: none;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      z-index: 999;
+    }
+
+    .popup-menu ul {
+      list-style: none;
+      margin: 0;
+      padding: 8px 0;
+    }
+
+    .popup-menu ul li {
+      padding: 10px 16px;
+      cursor: pointer;
+      color: #cc0d2d;
+      font-weight: bold;
+    }
+
+    .popup-menu ul li:hover {
+      background-color: #f2f2f2;
+    }
+
+    /* ===== KATEGORI SLIDER ===== */
+    .category-container {
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+      margin: 20px 10px;
+      padding: 0 10px;
+    }
+
+    .scroll-btn {
+      background-color: #cc0d2d;
+      color: white;
+      border: none;
+      padding: 10px 14px;
+      border-radius: 15px;
+      font-size: 18px;
+      cursor: pointer;
+      z-index: 1;
+    }
+
+    .category-scroll {
+      display: flex;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      gap: 10px;
+      padding: 10px 0;
+      margin: 0 10px;
+    }
+
+    .category-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .category-button {
+      flex: 0 0 auto;
+      background-color: #cc0d2d;
+      color: white;
+      border: 2px solid white;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    .category-button.active {
+      background-color: white;
+      color: #cc2c2c;
+      border: 2px solid #cc2c2c;
+    }
+
+    /* ===== GRID GAME ===== */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 16px;
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 0 25px;
+    }
+
+    a.game-card {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .game-card {
+      background: #cc0d2d;
+      border-radius: 12px;
+      overflow: hidden;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+      opacity: 0;
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .game-card:hover {
+      transform: scale(1.05);
+    }
+
+    .game-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .game-title {
+      padding: 10px;
+      font-size: 11px;
+      font-weight: bold;
+      color: white;
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ======= NAVBAR ======= -->
+  <header>
+    <div class="logo">
+      <img src="https://files.catbox.moe/x96ra5.png" alt="BONSTORE Logo">
+    </div>
+    <div class="menu-btn" id="menuBtn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="popup-menu" id="popupMenu">
+      <ul>
+        <li>Informasi</li>
+        <li>Info Admin</li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ======= KATEGORI SLIDER ======= -->
+  <div class="category-container">
+    <button class="scroll-btn" onclick="scrollCategory(-200)">&#8249;</button>
+    <div class="category-scroll" id="categoryScroll">
+      <button class="category-button active" data-kategori="topup">TopUp Game</button>
+<button class="category-button" data-kategori="sosmed">Suntik Sosmed</button>
+<button class="category-button" data-kategori="voucher">Voucher</button>
+
+    </div>
+    <button class="scroll-btn" onclick="scrollCategory(200)">&#8250;</button>
+  </div>
+
+  <!-- ======= TOP UP GAME ======= -->
+  <div class="grid-container" id="gameContainer">
+  <a href="freefire.html" class="game-card" data-kategori="topup">
+    <img src="https://files.catbox.moe/y55zh4.png" alt="freefire">
+    <div class="game-title">FREE FIRE</div>
+  </a>
+  <a href="mlbb.html" class="game-card" data-kategori="topup">
+    <img src="https://files.catbox.moe/hpuzi6.jpg" alt="mlbb">
+    <div class="game-title">MOBILE LEGENDS</div>
+  </a>
+  <a href="pubg.html" class="game-card" data-kategori="topup">
+    <img src="https://files.catbox.moe/62bwcf.jpg" alt="pubg">
+    <div class="game-title">PUBG MOBILE</div>
+  </a>
+  <a href="cod.html" class="game-card" data-kategori="topup">
+    <img src="https://files.catbox.moe/k31mya.jpg" alt="cod">
+    <div class="game-title">CALL OF DUTY</div>
+  </a>
+  <a href="valoran.html" class="game-card" data-kategori="topup">
+    <img src="https://files.catbox.moe/4x6sm7.jpg" alt="valoran">
+    <div class="game-title">VALORAN</div>
+  </a>
+  <!-- ======= SUNTIK SOSMED ======= -->
+  <a href="ttfol.html" class="game-card" data-kategori="sosmed">
+    <img src="https://files.catbox.moe/pbzrrm.png" alt="tiktok">
+    <div class="game-title">FOLLOWERS</div>
+  </a>
+  <a href="ttlike.html" class="game-card" data-kategori="sosmed">
+    <img src="https://files.catbox.moe/pbzrrm.png" alt="tiktok">
+    <div class="game-title">LIKE</div>
+  </a>
+  <a href="ttview.html" class="game-card" data-kategori="sosmed">
+    <img src="https://files.catbox.moe/pbzrrm.png" alt="tiktok">
+    <div class="game-title">VIEW</div>
+  </a>
+  <a href="igfol.html" class="game-card" data-kategori="sosmed">
+    <img src="https://files.catbox.moe/n110ij.jpeg" alt="instagram">
+    <div class="game-title">FOLLOWERS</div>
+  </a>
+  <a href="iglike.html" class="game-card" data-kategori="sosmed">
+    <img src="https://files.catbox.moe/n110ij.jpeg" alt="instagram">
+    <div class="game-title">LIKE</div>
+  </a>
+  <a href="#" class="game-card" data-kategori="sosmed">
+    <img src="https://files.catbox.moe/fq8aia.jpg" alt="valoran">
+    <div class="game-title">FOLLOWERS</div>
+  </a>
+  <a href="#" class="game-card" data-kategori="sosmed">
+    <img src="https://files.catbox.moe/fq8aia.jpg" alt="valoran">
+    <div class="game-title">LIKE</div>
+  </a>
+  <a href="#" class="game-card" data-kategori="sosmed">
+    <img src="https://files.catbox.moe/fq8aia.jpg" alt="valoran">
+    <div class="game-title">VIEW</div>
+  </a>
+  <a href="#" class="game-card" data-kategori="sosmed">
+    <img src="https://files.catbox.moe/eqxdl1.jpg" alt="valoran">
+    <div class="game-title">FOLLOWERS</div>
+  </a>
+  <a href="#" class="game-card" data-kategori="sosmed">
+    <img src="https://files.catbox.moe/eqxdl1.jpg" alt="valoran">
+    <div class="game-title">LIKE</div>
+  </a>
+  <a href="#" class="game-card" data-kategori="sosmed">
+    <img src="https://files.catbox.moe/eqxdl1.jpg" alt="valoran">
+    <div class="game-title">VIEW</div>
+  </a>
+  <a href="#" class="game-card" data-kategori="sosmed">
+    <img src="https://files.catbox.moe/j3vs87.jpg" alt="valoran">
+    <div class="game-title">SUBSCRIBE</div>
+  </a>
+  <a href="#" class="game-card" data-kategori="sosmed">
+    <img src="https://files.catbox.moe/j3vs87.jpg" alt="valoran">
+    <div class="game-title">LIKE</div>
+  </a>
+  <a href="#" class="game-card" data-kategori="sosmed">
+    <img src="https://files.catbox.moe/j3vs87.jpg" alt="youtube">
+    <div class="game-title">VIEW</div>
+  </a>
+  </div>
+
+  <!-- ======= SCRIPT MENU & KATEGORI ======= -->
+  <script>
+  const categoryButtons = document.querySelectorAll('.category-button');
+const allGameCards = document.querySelectorAll('.game-card');
+
+function filterKategori(kategoriDipilih) {
+  allGameCards.forEach(card => {
+    const kategoriCard = card.dataset.kategori;
+    if (kategoriCard === kategoriDipilih) {
+      card.style.display = 'block';
+    } else {
+      card.style.display = 'none';
+      card.style.animation = 'none';
+    }
+  });
+
+  applyAnimation(kategoriDipilih);
+}
+
+function applyAnimation(kategoriDipilih) {
+  const visibleCards = Array.from(allGameCards).filter(
+    card => card.dataset.kategori === kategoriDipilih
+  );
+
+  visibleCards.forEach((card, index) => {
+    card.style.animation = 'none';
+    void card.offsetWidth;
+    card.style.opacity = 0;
+    setTimeout(() => {
+      card.style.animation = `fadeInUp 0.4s ease forwards`;
+      card.style.animationDelay = `${0.15 * index}s`;
+    }, 50);
+  });
+}
+
+categoryButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    categoryButtons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const kategoriDipilih = btn.dataset.kategori;
+    filterKategori(kategoriDipilih);
+  });
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+  const aktif = document.querySelector('.category-button.active');
+  if (aktif) {
+    const kategoriAwal = aktif.dataset.kategori;
+    filterKategori(kategoriAwal);
+  }
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>List Suntik Sosmed</title>
+  <style>
+    body {
+      font-family: 'Arial Rounded MT Bold', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fff;
+    }
+
+    /* ===== NAVBAR ===== */
+    header {
+      background: #cc0d2d;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    .menu-btn {
+      width: 30px;
+      height: 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .menu-btn span {
+      height: 6px;
+      border-radius: 3px;
+      background: white;
+      display: block;
+    }
+
+    .popup-menu {
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      width: 160px;
+      display: none;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      z-index: 999;
+    }
+
+    .popup-menu ul {
+      list-style: none;
+      margin: 0;
+      padding: 8px 0;
+    }
+
+    .popup-menu ul li {
+      padding: 10px 16px;
+      cursor: pointer;
+      color: #cc0d2d;
+      font-weight: bold;
+    }
+
+    .popup-menu ul li:hover {
+      background-color: #f2f2f2;
+    }
+
+    .diamond-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 20px;
+      justify-content: center;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .diamond-card {
+      position: relative;
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      width: 40%;
+      height: 10vh;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-width: 150px;
+      min-height: 60px;
+      overflow: hidden;
+      opacity: 0;
+    }
+
+    .diamond-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .diamond-top span {
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .diamond-top img {
+      width: 20px;
+      height: 20px;
+    }
+
+    .price-tag {
+      position: absolute;
+      background-color: #cc0d2d;
+      color: white;
+      padding: 1px 15px;
+      border-top-left-radius: 8px;
+      font-size: 12px;
+      bottom: 1px;
+      right: 1px;
+    }
+
+    @keyframes fade-in {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      animation: fade-in 0.6s ease forwards;
+    }
+
+    @media (max-width: 600px) {
+      .diamond-card {
+        width: 90px;
+        height: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ======= NAVBAR ======= -->
+  <header>
+    <div class="logo">
+      <img src="https://files.catbox.moe/x96ra5.png" alt="BONSTORE Logo">
+    </div>
+    <div class="menu-btn" id="menuBtn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="popup-menu" id="popupMenu">
+      <ul>
+        <li>Informasi</li>
+        <li>Info Admin</li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="diamond-list" id="product-list"></div>
+
+  <script>
+    const produk = [
+      { nama: '12 Diamond Free Fire', harga: 3000 },
+      { nama: '50 Diamond Free Fire', harga: 8000 },
+      { nama: '70 Diamond Free Fire', harga: 10000 },
+      { nama: '100 Diamond Free Fire', harga: 14000 },
+      { nama: '140 Diamond Free Fire', harga: 19000 },
+      { nama: '210 Diamond Free Fire', harga: 27000 },
+      { nama: '200 Diamond Free Fire', harga: 46000 },
+      { nama: '355 Diamond Free Fire', harga: 53000 },
+      { nama: '500 Diamond Free Fire', harga: 64000 },
+      { nama: '720 Diamond Free Fire', harga: 89000 },
+      { nama: '1000 Diamond Free Fire', harga: 125000 },
+      { nama: '1450 Diamond Free Fire', harga: 179000 },
+      { nama: '2180 Diamond Free Fire', harga: 270000 },
+      { nama: '3640 Diamond Free Fire', harga: 450000 },
+      { nama: 'MEMBERSHIP MINGGUAN', harga: 29000 },
+      { nama: 'MEMBERSHIP BULANAN', harga: 85000 },
+    ];
+
+    const icon = "https://files.catbox.moe/hzsvv5.jpg"; // ikon Free Fire
+
+    const container = document.getElementById('product-list');
+
+    produk.forEach((p, i) => {
+      const card = document.createElement('div');
+      card.className = 'diamond-card fade-in';
+      card.style.animationDelay = `${i * 80}ms`;
+
+      card.innerHTML = `
+        <div class="diamond-top">
+          <span>${p.nama}</span>
+          <img src="${icon}" alt="icon" />
+        </div>
+        <div class="price-tag">Rp ${p.harga.toLocaleString('id-ID')}</div>
+      `;
+
+      card.onclick = () => {
+        localStorage.setItem('produkDipilih', JSON.stringify(p));
+        window.location.href = 'checkout.html';
+      };
+
+      container.appendChild(card);
+    });
+  </script>
+
+  <!-- ======= SCRIPT MENU ======= -->
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const popup = document.getElementById('popupMenu');
+
+    menuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!popup.contains(e.target) && !menuBtn.contains(e.target)) {
+        popup.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout - Bonskuy Store</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: sans-serif;
+      margin: 10;
+      padding: 0;
+      background: #fff;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h1 {
+      text-align: center;
+      color: #cc2c2c;
+      margin-bottom: 20px;
+    }
+
+    form {
+      max-width: 400px;
+      width: 100%;
+      background: #f8f8f8;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px #cc2c2c;
+    }
+
+    label {
+      font-weight: bold;
+      margin-top: 1px;
+      display: block;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 5px;
+      margin-top: 1px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #cc2c2c;
+      color: white;
+      border: none;
+      font-weight: bold;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #b02525;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 20px;
+      color: #cc2c2c;
+    }
+        /* ===== NAVBAR ===== */
+    header {
+      background: #cc0d2d;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    .menu-btn {
+      width: 30px;
+      height: 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+
+    .menu-btn span {
+      height: 6px;
+      border-radius: 3px;
+      background: white;
+      display: block;
+    }
+
+    /* ===== POPUP MENU ===== */
+    .popup-menu {
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      width: 160px;
+      display: none;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      z-index: 999;
+    }
+
+    .popup-menu ul {
+      list-style: none;
+      margin: 0;
+      padding: 8px 0;
+    }
+
+    .popup-menu ul li {
+      padding: 10px 16px;
+      cursor: pointer;
+      color: #cc0d2d;
+      font-weight: bold;
+    }
+
+    .popup-menu ul li:hover {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+
+  <div>
+    <h1>Checkout Produk</h1>
+
+    <form onsubmit="kirimKeWA(event)">
+      <label>Produk</label>
+      <input type="text" id="produk" readonly>
+
+      <label>Harga</label>
+      <input type="text" id="harga" readonly>
+
+      <label>Metode Pembayaran</label>
+      <select id="metode" required>
+        <option value="Qris">QRIS</option>
+        <option value="Dana">DANA</option>
+      </select>
+
+      <label>Id Game/Nomor Hp</label>
+      <input type="text" id="username" placeholder="isi id game/nomor hp" required>
+
+      <button type="submit">ORDER VIA WHATSAPP</button>
+    </form>
+
+    <footer>&copy; BONSTORE</footer>
+  </div>
+
+  <script>
+    const data = JSON.parse(localStorage.getItem('produkDipilih'));
+    if (!data) {
+      alert('Silakan pilih produk dari halaman utama.');
+      window.location.href = 'index.html';
+    } else {
+      document.getElementById('produk').value = data.nama;
+      document.getElementById('harga').value = 'Rp ' + data.harga.toLocaleString('id-ID');
+    }
+
+    function kirimKeWA(e) {
+      e.preventDefault();
+      const produk = document.getElementById('produk').value;
+      const harga = document.getElementById('harga').value;
+      const metode = document.getElementById('metode').value;
+      const username = document.getElementById('username').value;
+
+      const pesan = `*🛍HALO ADMIN, MAU ORDER*\n\n📦 Produk: ${produk}\n💸 Harga: ${harga}\n👤 Id Game/ Nomor Hp: ${username}\n💳 Pembayaran: ${metode}\n\nSilakan diproses min 🙏`;
+
+      const nomorAdmin = '6285141316926'; // GANTI dengan nomor WhatsApp kamu
+      const linkWA = `https://wa.me/${nomorAdmin}?text=${encodeURIComponent(pesan)}`;
+      window.open(linkWA, '_blank');
+    }
+  </script>
+
+</body>
+</html>
