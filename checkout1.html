@@ -74,7 +74,7 @@
       font-size: 20px;
       color: #cc2c2c;
     }
-        /* ===== NAVBAR ===== */
+
     header {
       background: #cc0d2d;
       padding: 10px 20px;
@@ -111,7 +111,6 @@
       display: block;
     }
 
-    /* ===== POPUP MENU ===== */
     .popup-menu {
       position: absolute;
       top: 60px;
@@ -152,6 +151,9 @@
       <label>Produk</label>
       <input type="text" id="produk" readonly>
 
+      <label>Kategori</label>
+      <input type="text" id="kategori" readonly>
+
       <label>Harga</label>
       <input type="text" id="harga" readonly>
 
@@ -161,7 +163,7 @@
         <option value="Dana">DANA</option>
       </select>
 
-      <label>Link Profil</label>
+      <label>Id Game/Nomor Hp</label>
       <input type="text" id="username" placeholder="isi id game/nomor hp" required>
 
       <button type="submit">ORDER VIA WHATSAPP</button>
@@ -177,19 +179,21 @@
       window.location.href = 'index.html';
     } else {
       document.getElementById('produk').value = data.nama;
+      document.getElementById('kategori').value = data.kategori;
       document.getElementById('harga').value = 'Rp ' + data.harga.toLocaleString('id-ID');
     }
 
     function kirimKeWA(e) {
       e.preventDefault();
       const produk = document.getElementById('produk').value;
+      const kategori = document.getElementById('kategori').value;
       const harga = document.getElementById('harga').value;
       const metode = document.getElementById('metode').value;
       const username = document.getElementById('username').value;
 
-      const pesan = `*🛍HALO ADMIN, MAU ORDER*\n\n📦 Produk: ${produk}\n💸 Harga: ${harga}\n👤 Link profil: ${username}\n💳 Pembayaran: ${metode}\n\nSilakan diproses min 🙏`;
+      const pesan = `*🛍HALO ADMIN, MAU ORDER*\n\n📦 Produk: ${produk}\n📁 Kategori: ${kategori}\n💸 Harga: ${harga}\n👤 Id Game/ Nomor Hp: ${username}\n💳 Pembayaran: ${metode}\n\nSilakan diproses min 🙏`;
 
-      const nomorAdmin = '6285141316926'; // GANTI dengan nomor WhatsApp kamu
+      const nomorAdmin = '6285141316926';
       const linkWA = `https://wa.me/${nomorAdmin}?text=${encodeURIComponent(pesan)}`;
       window.open(linkWA, '_blank');
     }
