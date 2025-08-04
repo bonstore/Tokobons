@@ -24,7 +24,7 @@
     }
 
     .logo img {
-  height: 40px;
+  height: 45px;
   position: relative; /* diperlukan untuk bisa digeser */
   left: -35px; /* geser ke kiri */
   top: 0px;    /* geser ke bawah */
@@ -93,21 +93,21 @@
     }
 
     .diamond-card {
-      position: relative;
-      background-color: white;
-      border-radius: 15px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-      width: 40%;
-      height: 10vh;
-      padding: 10px 12px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-width: 150px;
-      min-height: 60px;
-      overflow: hidden;
-      opacity: 0;
-    }
+  position: relative;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 2px 3px #cc0d2d;
+  width: 40%;
+  height: 8vh;           /* dari 10vh menjadi 6vh */
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* lebih rapi tengah */
+  min-width: 150px;
+  min-height: 40px;       /* dari 60px jadi 40px */
+  overflow: hidden;
+  opacity: 0;
+}
 
     .diamond-top {
       display: flex;
@@ -121,8 +121,8 @@
     }
 
     .diamond-top img {
-      width: 20px;
-      height: 20px;
+      width: 30px;
+      height: 30px;
     }
 
     .price-tag {
@@ -131,9 +131,9 @@
       color: white;
       padding: 1px 15px;
       border-top-left-radius: 8px;
-      font-size: 12px;
-      bottom: 1px;
-      right: 1px;
+      font-size: 13px;
+      bottom: 0px;
+      right: 0px;
     }
 
     @keyframes fade-in {
@@ -223,18 +223,27 @@
 
 
   <script>
-   const produk = [
-  { nama: '60 Diamond Genshin Impact', harga: 14000, kategori: 'Genshin Impact' },
-  { nama: '330 Diamond Genshin Impact', harga: 70000, kategori: 'Genshin Impact' },
-  { nama: '1090 Diamond Genshin Impact', harga: 195000, kategori: 'Genshin Impact' },
-  { nama: '1420 Diamond Genshin Impact', harga: 260000, kategori: 'Genshin Impact' },
-  { nama: '1x Blessing Genshin Impact', harga: 68000, kategori: 'Genshin Impact' },
-  { nama: '2x Blessing Genshin Impact', harga: 127500, kategori: 'Genshin Impact' },
-  { nama: '4x Blessing Genshin Impact', harga: 248000, kategori: 'Genshin Impact' },
-  { nama: '5x Blessing Genshin Impact', harga: 327000, kategori: 'Genshin Impact' },
-     ];
+    const produk = [
+  { nama: '15 UC PUBG Mobile', harga: 10000, kategori: 'TopUp Game' },
+  { nama: '25 UC PUBG Mobile', harga: 14000, kategori: 'TopUp Game' },
+  { nama: '70 UC PUBG Mobile', harga: 28000, kategori: 'TopUp Game' },
+  { nama: '100 UC PUBG Mobile', harga: 35000, kategori: 'TopUp Game' },
+  { nama: '150 UC PUBG Mobile', harga: 47000, kategori: 'TopUp Game' },
+  { nama: '200 UC PUBG Mobile', harga: 62000, kategori: 'TopUp Game' },
+  { nama: '250 UC PUBG Mobile', harga: 76000, kategori: 'TopUp Game' },
+  { nama: '300 UC PUBG Mobile', harga: 83000, kategori: 'TopUp Game' },
+  { nama: '350 UC PUBG Mobile', harga: 93000, kategori: 'TopUp Game' },
+  { nama: '375 UC PUBG Mobile', harga: 102000, kategori: 'TopUp Game' },
+  { nama: '500 UC PUBG Mobile', harga: 125000, kategori: 'TopUp Game' },
+  { nama: '700 UC PUBG Mobile', harga: 163000, kategori: 'TopUp Game' },
+  { nama: '750 UC PUBG Mobile', harga: 182000, kategori: 'TopUp Game' },
+  { nama: '1000 UC PUBG Mobile', harga: 242000, kategori: 'TopUp Game' },
+  { nama: '1250 UC PUBG Mobile', harga: 310000, kategori: 'TopUp Game' },
+  { nama: '1500 UC PUBG Mobile', harga: 350000, kategori: 'TopUp Game' },
+];
 
-    const icon = "https://files.catbox.moe/hzsvv5.jpg";
+
+    const icon = "https://files.catbox.moe/xjytc4.png";
     const container = document.getElementById('product-list');
 
     produk.forEach((p, i) => {
